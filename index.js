@@ -4,6 +4,7 @@ import {buildSchema} from 'graphql'
 import usersOffersRouter from './routes/userOffers-route.js'
 import offersRouter from './routes/offers-route.js'
 import usersRouter from './routes/users-route.js'
+import offerSchema from './schema/index.js'
 
 const app = express()
 const port = 5000
@@ -12,23 +13,25 @@ const port = 5000
 
 app.use(express())
 
-//Put routes in here 
+// //Put routes in here 
 
-var schema = buildSchema(`
-  type Query {
-    hello: String
-  }
-`);
+// var schema = buildSchema(`
+//   type Query {
+//     hello: String
+//   }
+// `);
 
-var root = {
-    hello: () => {
-      return 'Hello world!';
-    },
-  };
+
+// //Example schema to test graphiQL
+// var root = {
+//     hello: () => {
+//       return 'Hello world!';
+//     },
+//   };
   
   app.use('/graphql', graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    schema: offerSchema,
+    // rootValue: root,
     graphiql: true,
   }));
 
