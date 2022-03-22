@@ -1,4 +1,6 @@
 import express from 'express'
+import {graphqlHTTP} from 'express-graphql'
+import {buildSchema} from 'graphql'
 import usersOffersRouter from './routes/userOffers-route.js'
 import offersRouter from './routes/offers-route.js'
 import usersRouter from './routes/users-route.js'
@@ -6,11 +8,31 @@ import usersRouter from './routes/users-route.js'
 const app = express()
 const port = 5000
 
-app.use(express.json())
+
+
+app.use(express())
 
 //Put routes in here 
 
+var schema = buildSchema(`
+  type Query {
+    hello: String
+  }
+`);
 
-app.listen(() => {console.log("App listening on port 5000")});
+var root = {
+    hello: () => {
+      return 'Hello world!';
+    },
+  };
+  
+  app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  }));
+
+
+app.listen(5000, () => {console.log("App listening on port 5000")});
 
 
