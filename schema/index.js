@@ -1,6 +1,9 @@
 import {GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID} from 'graphql'
 import userType from './types/userType.js'
+import {pgdb} from '../database/pgdb.js'
 
+
+// pgdb(pgPool).getUser(2); 
 
 const RootQueryType = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -10,14 +13,10 @@ const RootQueryType = new GraphQLObjectType({
             type: userType,
             description: 'The user given by a specified ID',
             args: {
-                id: {type: new GraphQLNonNull(GraphQLID)}
+                userid: {type: new GraphQLNonNull(GraphQLID)}
             },
-            resolve: () => {
-                return {
-                    id: 1,
-                    name: 'Jack',
-                    email: 'Jack@jackmail.com'
-                }
+            resolve: (obj, args, {pgPool}) => {
+                return pgdb(pgPool).getUser(args.userid)
             }
         }
     }

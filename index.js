@@ -5,7 +5,7 @@ import usersOffersRouter from './routes/userOffers-route.js'
 import offersRouter from './routes/offers-route.js'
 import usersRouter from './routes/users-route.js'
 import offerSchema from './schema/index.js'
-
+import pgPool from './db.js'
 const app = express()
 const port = 5000
 
@@ -33,6 +33,7 @@ app.use(express())
     schema: offerSchema,
     // rootValue: root,
     graphiql: true,
+    context: {pgPool}
   }));
 
 

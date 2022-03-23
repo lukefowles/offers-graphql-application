@@ -4,7 +4,7 @@ const {Pool} = pkg
 const pool = new Pool({
     user: "",
     host: "localhost",
-    database: "offers-service-graphql-application",
+    database: "p9175620_luke_fowles",
     password: "",
     port: 5432
 })
