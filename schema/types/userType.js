@@ -4,15 +4,17 @@ import {pgdb} from '../../database/pgdb.js'
 
 const userType = new GraphQLObjectType({
     name: 'userType',
-    fields: {
-        userid: {type: GraphQLID},
-        name: {type: new GraphQLNonNull(GraphQLString)},
-        email: {type: new GraphQLNonNull(GraphQLString)},
-        userOffers: {
-            type: new GraphQLList(userOfferType),
-            resolve(obj, args, {pgPool}) {
-                return pgdb(pgPool).getUserOffers(obj.userid)
-            }}
+    fields: () => {
+        return {
+            userid: {type: GraphQLID},
+            name: {type: new GraphQLNonNull(GraphQLString)},
+            email: {type: new GraphQLNonNull(GraphQLString)},
+            userOffers: {
+                type: new GraphQLList(userOfferType),
+                resolve(obj, args, {pgPool}) {
+                    return pgdb(pgPool).getUserOffers(obj.userid)
+                }}
+            }
     }
 })
 

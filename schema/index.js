@@ -1,6 +1,7 @@
 import {GraphQLSchema, GraphQLObjectType, GraphQLString, GraphQLNonNull, GraphQLID} from 'graphql'
 import userType from './types/userType.js'
 import {pgdb} from '../database/pgdb.js'
+import userMutationType from './mutations/userMutations.js'
 
 
 // pgdb(pgPool).getUser(2); 
@@ -19,6 +20,13 @@ const RootQueryType = new GraphQLObjectType({
                 return pgdb(pgPool).getUser(args.userid)
             }
         }
+    }
+})
+
+const RootMutationType = new GraphQLObjectType({
+    name: 'RootMutationType',
+    fields: () => {
+        AddUser: userMutationType
     }
 })
 
