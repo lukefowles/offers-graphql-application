@@ -5,7 +5,7 @@ import {pgdb} from '../../database/pgdb.js'
 const userInputType = new GraphQLInputObjectType({
     name: 'userInput',
     fields: {
-        userid: {type: GraphQLID},
+        userid: {type: new GraphQLNonNull(GraphQLID)},
         name: {type: new GraphQLNonNull(GraphQLString)},
         email: {type: new GraphQLNonNull(GraphQLString)},
     }
@@ -16,7 +16,7 @@ const userMutationType = {
     args: {
         input: {type: new GraphQLNonNull(userInputType)}
     },
-    resolve(obj, { input }, {pgPool} ) {
+    resolve(obj, { input }, { pgPool } ) {
         return pgdb(pgPool).addNewUser(input);
     }
 }

@@ -25,14 +25,15 @@ const RootQueryType = new GraphQLObjectType({
 
 const RootMutationType = new GraphQLObjectType({
     name: 'RootMutationType',
-    fields: () => {
+    fields: () => ({
         AddUser: userMutationType
-    }
+    })
 })
 
 const offerSchema = new GraphQLSchema({
     query: RootQueryType,
-    //mutation:
+    mutation: RootMutationType
+
 })
 
 export default offerSchema

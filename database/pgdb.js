@@ -17,11 +17,11 @@ function pgdb(pgPool) {
             .then(res => res.rows)
         },
 
-        addNewContest() {
+        addNewUser({userid, name, email}) {
             return pgPool.query(`
-            INSERT INTO users(id, name, email)
+            INSERT INTO users(userid, name, email)
             VALUES ($1, $2, $3)
-            RETURNING *`, [id, name, email])
+            RETURNING *`, [userid, name, email])
             .then(res => res.rows[0])
         }
     }
