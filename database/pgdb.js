@@ -1,4 +1,5 @@
 
+//database queries
 function pgdb(pgPool) {
     return {
         getUser(id) {
