@@ -37,6 +37,6 @@ app.use(express())
   }));
 
 
-app.listen(5000, () => {console.log("App listening on port 5000")});
+app.listen(5000, () => {console.log("App on port 5000")});
 
 
